@@ -40,8 +40,16 @@ public class Stock {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getQuantity() {
         return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public Wallet getWallet() {
@@ -50,13 +58,5 @@ public class Stock {
 
     public void setWallet(Wallet wallet) {
         this.wallet = wallet;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

@@ -1,7 +1,9 @@
 package pl.kuropatva.stocksim.model.entity;
 
-import jakarta.persistence.*;
-import org.springframework.core.annotation.Order;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;
 

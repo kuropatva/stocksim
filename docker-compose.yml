@@ -13,6 +13,8 @@ services:
   app:
     image: myapp:dev
     restart: always
+    deploy:
+      replicas: 3
     environment:
       DB_USERNAME: user
       DB_PASSWORD: password

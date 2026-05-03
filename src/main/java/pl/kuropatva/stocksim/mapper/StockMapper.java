@@ -1,10 +1,10 @@
 package pl.kuropatva.stocksim.mapper;
+
 import org.springframework.stereotype.Component;
 import pl.kuropatva.stocksim.model.dto.web.StockDto;
 import pl.kuropatva.stocksim.model.dto.web.StockListDto;
 import pl.kuropatva.stocksim.model.entity.Stock;
 
-import java.math.BigInteger;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;

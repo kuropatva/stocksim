@@ -17,6 +17,6 @@ docker buildx build --platform $platform --load -t myapp:dev .
 
 # set env and start compose
 $env:PORT = $Port.ToString()
-docker-compose up --build --force-recreate --scale app=3 -d
+docker-compose up --build --force-recreate
 
 Write-Host "App available at http://localhost:$Port"

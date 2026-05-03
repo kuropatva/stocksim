@@ -1,11 +1,9 @@
 package pl.kuropatva.stocksim.service;
 
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.resilience.annotation.ConcurrencyLimit;
 import org.springframework.resilience.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import pl.kuropatva.stocksim.exception.InsufficientStockException;
 import pl.kuropatva.stocksim.exception.StockNotFoundException;
@@ -20,11 +18,10 @@ import pl.kuropatva.stocksim.repository.WalletRepository;
 @Service
 public class TransactionService {
 
+    private static final int TRADE_QTY = 1;
     private final WalletRepository walletRepo;
     private final AuditLogRepository logRepo;
     private final StockRepository stockRepo;
-
-    private static final int TRADE_QTY = 1;
 
     public TransactionService(WalletRepository walletRepo, AuditLogRepository logRepo, StockRepository stockRepo) {
         this.walletRepo = walletRepo;
@@ -33,7 +30,7 @@ public class TransactionService {
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED)
-    @Retryable(maxRetries = 2)
+    @Retryable(maxRetries = 2, excludes = {InsufficientStockException.class, StockNotFoundException.class})
     public void executeTrade(String walletId, String stockName, TradeRequest tradeRequest) {
         String type = tradeRequest.type().toLowerCase();
         Wallet wallet = getWallet(walletId);

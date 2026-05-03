@@ -23,6 +23,6 @@ docker buildx build --platform "$PLATFORM" --load -t myapp:dev .
 
 # export PORT for docker-compose and start
 export PORT
-docker-compose up --build --force-recreate --scale app=3 -d
+docker-compose up --build --force-recreate
 
 echo "App available at http://localhost:${PORT}"

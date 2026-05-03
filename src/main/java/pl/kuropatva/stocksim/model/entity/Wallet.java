@@ -1,6 +1,9 @@
 package pl.kuropatva.stocksim.model.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +22,8 @@ public class Wallet {
     private List<Stock> stocks = new ArrayList<>();
 
 
-    public Wallet() {}
+    public Wallet() {
+    }
 
     public Wallet(String id) {
         this.id = id;

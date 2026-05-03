@@ -1,6 +1,5 @@
 package pl.kuropatva.stocksim.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.kuropatva.stocksim.model.dto.web.StockListDto;
 import pl.kuropatva.stocksim.service.BankStockService;
@@ -9,7 +8,7 @@ import pl.kuropatva.stocksim.service.BankStockService;
 @RequestMapping("/stocks")
 public class StockController {
 
-    private BankStockService bankStockService;
+    private final BankStockService bankStockService;
 
     public StockController(BankStockService bankStockService) {
         this.bankStockService = bankStockService;

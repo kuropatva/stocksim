@@ -1,8 +1,6 @@
 package pl.kuropatva.stocksim.controller;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.kuropatva.stocksim.model.dto.web.TradeRequest;
 import pl.kuropatva.stocksim.model.dto.web.WalletDto;
@@ -13,8 +11,8 @@ import pl.kuropatva.stocksim.service.WalletService;
 @RequestMapping("/wallets")
 public class WalletController {
 
-    private TransactionService transactionService;
-    private WalletService walletService;
+    private final TransactionService transactionService;
+    private final WalletService walletService;
 
     public WalletController(TransactionService transactionService, WalletService walletService) {
         this.transactionService = transactionService;

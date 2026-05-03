@@ -1,10 +1,12 @@
 package pl.kuropatva.stocksim.controller;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import pl.kuropatva.stocksim.model.dto.web.LogListDto;
 import pl.kuropatva.stocksim.service.LogService;
 
@@ -12,8 +14,8 @@ import pl.kuropatva.stocksim.service.LogService;
 @RequestMapping("/")
 public class UtilController {
 
-    private LogService logService;
-    private ConfigurableApplicationContext context;
+    private final LogService logService;
+    private final ConfigurableApplicationContext context;
 
     public UtilController(LogService logService, ConfigurableApplicationContext context) {
         this.logService = logService;
@@ -27,6 +29,12 @@ public class UtilController {
 
     @PostMapping("/chaos")
     public void killInstance() {
-        new Thread(() -> { try { Thread.sleep(1000); } catch (Exception _) {} System.exit(SpringApplication.exit(context, () -> 0)); }).start();
+        new Thread(() -> {
+            try {
+                Thread.sleep(100);
+            } catch (Exception _) {
+            }
+            System.exit(SpringApplication.exit(context, () -> 0));
+        }).start();
     }
 }
