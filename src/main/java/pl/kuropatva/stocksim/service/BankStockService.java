@@ -25,6 +25,6 @@ public class BankStockService {
     @Transactional
     public void setAllStocks(StockListDto stocks) {
         stockRepository.deleteAllByWalletId(null);
-        stockRepository.saveAll(stockMapper.toEntityList(stocks));
+        stockRepository.saveAllAndFlush(stockMapper.toEntityList(stocks));
     }
 }

@@ -1,0 +1,669 @@
+{
+  "info": {
+    "_postman_id": "b27c2004-e44b-4415-b94d-df8f48d367f6",
+    "name": "Stock Market - 20 Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "31098592"
+  },
+  "item": [
+    {
+      "name": "01. Setup - Seed Bank",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"stocks\": [{\"name\": \"AAPL\", \"quantity\": 10}, {\"name\": \"TSLA\", \"quantity\": 5}]}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/stocks",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "stocks"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "02. Verify Bank State",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/stocks",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "stocks"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "03. Buy AAPL - Create Wallet",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"type\": \"buy\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/wallets/w1/stocks/AAPL",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "wallets",
+            "w1",
+            "stocks",
+            "AAPL"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "04. Get Wallet Stock Quantity",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/wallets/w1/stocks/AAPL",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "wallets",
+            "w1",
+            "stocks",
+            "AAPL"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "05. Buy Second AAPL",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"type\": \"buy\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/wallets/w1/stocks/AAPL",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "wallets",
+            "w1",
+            "stocks",
+            "AAPL"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "06. Get Full Wallet State",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/wallets/w1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "wallets",
+            "w1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "07. Sell AAPL - Success",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"type\": \"sell\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/wallets/w1/stocks/AAPL",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "wallets",
+            "w1",
+            "stocks",
+            "AAPL"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CHECK BANK",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/stocks",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "stocks"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CHECK WALLET",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/wallets/w1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "wallets",
+            "w1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "08. Sell Not Owned (400)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"type\": \"sell\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/wallets/w1/stocks/TSLA",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "wallets",
+            "w1",
+            "stocks",
+            "TSLA"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "09. Buy Unknown Stock (404)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"type\": \"buy\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/wallets/w1/stocks/FAKE",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "wallets",
+            "w1",
+            "stocks",
+            "FAKE"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "10. Drain TSLA (1/5)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"type\": \"buy\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/wallets/w2/stocks/TSLA",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "wallets",
+            "w2",
+            "stocks",
+            "TSLA"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "11. Drain TSLA (2/5)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"type\": \"buy\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/wallets/w2/stocks/TSLA",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "wallets",
+            "w2",
+            "stocks",
+            "TSLA"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "12. Drain TSLA (3/5)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"type\": \"buy\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/wallets/w2/stocks/TSLA",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "wallets",
+            "w2",
+            "stocks",
+            "TSLA"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "13. Drain TSLA (4/5)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"type\": \"buy\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/wallets/w2/stocks/TSLA",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "wallets",
+            "w2",
+            "stocks",
+            "TSLA"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "14. Drain TSLA (5/5)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"type\": \"buy\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/wallets/w2/stocks/TSLA",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "wallets",
+            "w2",
+            "stocks",
+            "TSLA"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "15. Buy Out-of-Stock TSLA (400)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"type\": \"buy\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/wallets/w3/stocks/TSLA",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "wallets",
+            "w3",
+            "stocks",
+            "TSLA"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "16. Check Audit Log",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/log",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "log"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "17. Reset Bank State",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"stocks\": [{\"name\": \"CHAOS\", \"quantity\": 100}]}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/stocks",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "stocks"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "18. CHAOS - Kill Instance",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/chaos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "chaos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "19. HA Check - Stocks Post-Chaos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/stocks",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "stocks"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "20. HA Check - Wallet Post-Chaos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/wallets/w2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "wallets",
+            "w2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DRAIN CHAOS",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Config — edit only if needed\r",
+              "const URL = pm.collectionVariables.get(\"baseUrl\") + \"/wallets/w5/stocks/CHAOS\";\r",
+              "const METHOD = \"POST\";\r",
+              "const TOTAL_REQUESTS = 120;\r",
+              "const CONCURRENCY = 20; // number of parallel workers\r",
+              "const BODY = { type: \"buy\" };\r",
+              "const HEADERS = { \"Content-Type\": \"application/json\" };\r",
+              "\r",
+              "// derived\r",
+              "const ITERATIONS = Math.ceil(TOTAL_REQUESTS / CONCURRENCY);\r",
+              "\r",
+              "// stats\r",
+              "let stats = { total: 0, success: 0, errors: {}, start: Date.now() };\r",
+              "\r",
+              "function sendOne() {\r",
+              "  return new Promise((resolve) => {\r",
+              "    pm.sendRequest({\r",
+              "      url: URL,\r",
+              "      method: METHOD,\r",
+              "      header: HEADERS,\r",
+              "      body: { mode: \"raw\", raw: JSON.stringify(BODY) },\r",
+              "      // rejectUnauthorized: false // uncomment if using self-signed certs and needed\r",
+              "    }, (err, res) => {\r",
+              "      stats.total++;\r",
+              "      if (err) {\r",
+              "        stats.errors[\"sendError\"] = (stats.errors[\"sendError\"] || 0) + 1;\r",
+              "      } else if (res && res.code >= 200 && res.code < 300) {\r",
+              "        stats.success++;\r",
+              "      } else {\r",
+              "        const key = res && res.code ? `http_${res.code}` : \"unknown\";\r",
+              "        stats.errors[key] = (stats.errors[key] || 0) + 1;\r",
+              "      }\r",
+              "      resolve();\r",
+              "    });\r",
+              "  });\r",
+              "}\r",
+              "\r",
+              "async function worker(id, iterations) {\r",
+              "  for (let i = 0; i < iterations; i++) {\r",
+              "    // stop once we've reached TOTAL_REQUESTS\r",
+              "    if (stats.total >= TOTAL_REQUESTS) break;\r",
+              "    await sendOne();\r",
+              "  }\r",
+              "}\r",
+              "\r",
+              "(async () => {\r",
+              "  const workers = [];\r",
+              "  for (let w = 0; w < CONCURRENCY; w++) {\r",
+              "    workers.push(worker(w, ITERATIONS));\r",
+              "  }\r",
+              "  await Promise.all(workers);\r",
+              "  const elapsed = Date.now() - stats.start;\r",
+              "  console.log(\"Concurrency test finished. elapsed ms:\", elapsed);\r",
+              "  console.log(\"total:\", stats.total, \"success:\", stats.success, \"errors:\", stats.errors);\r",
+              "  pm.environment.set(\"concurrency_test_summary\", JSON.stringify({ elapsed, ...stats }));\r",
+              "})();\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"type\": \"buy\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/wallets/w5",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "wallets",
+            "w5"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}

@@ -1,11 +1,18 @@
 Simplified REST API stock exchange simulator written in Java (Spring) with docker + nginx + postgresql deployment
 
+# Techstack
+Java 26, Spring Framework, PostgreSQL, Docker, Nginx (load balancer)
+
+# JSON or not to JSON
+Considering that REST APIs utilize JSON as a standard for data exchange I assumed that missing quotation marks are
+mistakes, not intended design spec. Some goes for "..." in /log description.
+
 # Running
 Unix:
 
 `./run-unix.sh PORT`
 
-Windows *(modern versions should have correctly configured .ps1 association)*
+Windows *(powershell)*
 
 `.\run-win.ps1 -Port PORT`
 

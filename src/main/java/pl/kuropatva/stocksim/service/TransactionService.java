@@ -14,6 +14,8 @@ import pl.kuropatva.stocksim.model.entity.Wallet;
 import pl.kuropatva.stocksim.repository.AuditLogRepository;
 import pl.kuropatva.stocksim.repository.StockRepository;
 import pl.kuropatva.stocksim.repository.WalletRepository;
+import pl.kuropatva.stocksim.service.trade.BuyOperation;
+import pl.kuropatva.stocksim.service.trade.SellOperation;
 
 @Service
 public class TransactionService {
@@ -34,54 +36,14 @@ public class TransactionService {
     public void executeTrade(String walletId, String stockName, TradeRequest tradeRequest) {
         String type = tradeRequest.type().toLowerCase();
         Wallet wallet = getWallet(walletId);
-
         switch (type) {
-            case "buy" -> buy(wallet, stockName);
-            case "sell" -> sell(wallet, stockName);
+            case "buy" -> new BuyOperation().execute(wallet, stockName, stockRepo, TRADE_QTY);
+            case "sell" -> new SellOperation().execute(wallet, stockName, stockRepo, TRADE_QTY);
             default -> {
                 return;
             }
         }
-
         saveLogEntry(walletId, stockName, type);
-    }
-
-    private void buy(Wallet wallet, String stockName) {
-        Stock bankStock = stockRepo.findByNameAndWalletIsNullForUpdate(stockName).orElseThrow(() -> new StockNotFoundException("No stock with name " + stockName + " was found"));
-
-        if (bankStock.getQuantity() < TRADE_QTY) {
-            throw new InsufficientStockException("No stock in bank");
-        }
-        Stock walletStock = stockRepo.findByNameAndWalletIdForUpdate(stockName, wallet.getId()).orElseGet(() -> {
-            Stock newStock = new Stock(stockName);
-            newStock.setWallet(wallet);
-            newStock.setQuantity(0);
-            return newStock;
-        });
-
-        bankStock.modifyQuantity(-TRADE_QTY);
-        walletStock.modifyQuantity(TRADE_QTY);
-        stockRepo.save(bankStock);
-        stockRepo.save(walletStock);
-    }
-
-    private void sell(Wallet wallet, String stockName) {
-        Stock walletStock = stockRepo.findByNameAndWalletIdForUpdate(stockName, wallet.getId()).orElseThrow(() -> new InsufficientStockException("No stock in wallet"));
-
-        if (walletStock.getQuantity() < TRADE_QTY) {
-            throw new InsufficientStockException("No stock in wallet");
-        }
-        Stock bankStock = stockRepo.findByNameAndWalletIsNullForUpdate(stockName).orElseGet(() -> {
-            Stock newBankStock = new Stock(stockName);
-            newBankStock.setWallet(null);
-            newBankStock.setQuantity(0);
-            return newBankStock;
-        });
-
-        walletStock.modifyQuantity(-TRADE_QTY);
-        bankStock.modifyQuantity(TRADE_QTY);
-        stockRepo.save(bankStock);
-        stockRepo.save(walletStock);
     }
 
     private void saveLogEntry(String walletId, String stockName, String type) {
