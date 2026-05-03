@@ -4,8 +4,7 @@ Simplified REST API stock exchange simulator written in Java (Spring) with docke
 Java 26, Spring Framework, PostgreSQL, Docker, Nginx (load balancer)
 
 # JSON or not to JSON
-Considering that REST APIs utilize JSON as a standard for data exchange I assumed that missing quotation marks are
-mistakes, not intended design spec. Some goes for "..." in /log description.
+Considering that REST APIs utilize JSON as a standard for data exchange, I assumed that the missing quotation marks were mistakes rather than an intentional design specification. The same goes for ‘...’ in the /log description
 
 # Running
 Unix:
